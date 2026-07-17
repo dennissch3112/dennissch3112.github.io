@@ -190,6 +190,18 @@
   .topic .go{margin-top:auto;font-family:var(--font-mono);font-size:.72rem;color:var(--faint);display:flex;align-items:center;gap:6px;transition:gap .2s,color .2s}
   .topic:hover .go{gap:10px;color:var(--c)}
 
+  /* tools */
+  .tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .tool{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px 22px;display:flex;flex-direction:column;gap:10px;position:relative;transition:transform .25s,border-color .25s,background .25s}
+  .tool:hover{transform:translateY(-4px);background:var(--card-hi);border-color:var(--line-hi)}
+  .tool h3{font-family:var(--font-display);font-weight:700;font-size:1.3rem;color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .tool .deal{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:9999px;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent-hi);border:1px solid var(--line-hi)}
+  .tool .use{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .tool p{font-size:.88rem;color:var(--muted);line-height:1.5}
+  .tool .go{margin-top:auto;font-family:var(--font-mono);font-size:.72rem;color:var(--faint);display:flex;align-items:center;gap:6px;transition:gap .2s,color .2s}
+  .tool:hover .go{gap:10px;color:var(--accent)}
+  .aff-note{margin-top:18px;font-size:.78rem;color:var(--faint)}
+
   /* about */
   .about{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;
     background:var(--card);border:1px solid var(--line);border-radius:24px;padding:48px}
@@ -218,6 +230,7 @@
     .about{grid-template-columns:1fr;gap:32px;padding:34px}
     .vid-grid{grid-template-columns:1fr 1fr}
     .topic-grid{grid-template-columns:1fr 1fr}
+    .tools-grid{grid-template-columns:1fr 1fr}
     .head{flex-direction:column;align-items:flex-start;gap:10px}
     .head .desc{text-align:left}
   }
@@ -225,6 +238,7 @@
     nav.top a:not(.nav-cta){display:none}
     .vid-grid{grid-template-columns:1fr}
     .topic-grid{grid-template-columns:1fr}
+    .tools-grid{grid-template-columns:1fr}
     .hero{padding-top:64px}
     .stat{min-width:100px;padding:14px 18px}
   }
@@ -241,6 +255,7 @@
       <nav class="top">
         <a href="#videos">Videos</a>
         <a href="#themen">Themen</a>
+        <a href="#tools">Tools</a>
         <a href="#ueber">Über</a>
         <a class="nav-cta" href="https://www.youtube.com/@ichbinderkiinsider?sub_confirmation=1" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
@@ -334,6 +349,67 @@
           <span class="tnum">04 · 10 Videos</span><h3>KI im Alltag</h3><p>Konkrete Anwendungsfälle: Bewerbung, Freelancing, Geld sparen.</p><span class="go">Playlist ansehen →</span>
         </a>
       </div>
+    </section>
+
+    <section id="tools">
+      <div class="head reveal">
+        <div>
+          <div class="k">03 — Unser Stack</div>
+          <h2>Tools, mit denen wir arbeiten</h2>
+        </div>
+        <div class="desc">Womit dieser Kanal produziert wird — und was wir auf dem Kanal testen.</div>
+      </div>
+      <div class="tools-grid reveal">
+        <a class="tool" href="https://ref.wisprflow.ai/ki-insider" target="_blank" rel="sponsored noopener">
+          <h3>Wispr Flow <span class="deal">25% Rabatt*</span></h3>
+          <span class="use">Sprache-zu-Text</span>
+          <p>Skripte, Mails und Prompts einfach diktieren statt tippen — spart uns jeden Tag Zeit.</p>
+          <span class="go">Zum Tool →</span>
+        </a>
+        <a class="tool" href="https://claude.ai" target="_blank" rel="noopener">
+          <h3>Claude</h3>
+          <span class="use">Recherche &amp; Skripte</span>
+          <p>Unser Arbeitstier: Recherche, Skripte, Automatisierung — der halbe Kanal läuft darüber.</p>
+          <span class="go">Zum Tool →</span>
+        </a>
+        <a class="tool" href="https://elevenlabs.io" target="_blank" rel="noopener">
+          <h3>ElevenLabs</h3>
+          <span class="use">KI-Voiceover</span>
+          <p>Die deutsche Stimme unserer Videos — Text-zu-Sprache in Studioqualität.</p>
+          <span class="go">Zum Tool →</span>
+        </a>
+        <a class="tool" href="https://n8n.io" target="_blank" rel="noopener">
+          <h3>n8n</h3>
+          <span class="use">Automatisierung</span>
+          <p>Workflows ohne Code — unser täglicher KI-News-Agent läuft damit.</p>
+          <span class="go">Zum Tool →</span>
+        </a>
+        <a class="tool" href="https://chatgpt.com" target="_blank" rel="noopener">
+          <h3>ChatGPT</h3>
+          <span class="use">Allrounder</span>
+          <p>Der Standard, an dem sich alle messen — bei uns regelmäßig im Test und Vergleich.</p>
+          <span class="go">Zum Tool →</span>
+        </a>
+        <a class="tool" href="https://gemini.google.com" target="_blank" rel="noopener">
+          <h3>Gemini</h3>
+          <span class="use">Bilder &amp; Thumbnails</span>
+          <p>Googles KI — bei uns vor allem für Bildgenerierung und Thumbnails im Einsatz.</p>
+          <span class="go">Zum Tool →</span>
+        </a>
+        <a class="tool" href="https://www.perplexity.ai" target="_blank" rel="noopener">
+          <h3>Perplexity</h3>
+          <span class="use">KI-Suche</span>
+          <p>Schnelle Recherche mit Quellenangaben — ideal für den Faktencheck.</p>
+          <span class="go">Zum Tool →</span>
+        </a>
+        <a class="tool" href="https://notebooklm.google.com" target="_blank" rel="noopener">
+          <h3>NotebookLM</h3>
+          <span class="use">Wissens-Tool</span>
+          <p>Aus eigenen Dokumenten Wissen machen — Tutorial dazu auf dem Kanal.</p>
+          <span class="go">Zum Tool →</span>
+        </a>
+      </div>
+      <p class="aff-note reveal">*Affiliate-Link — du zahlst nichts extra, wir erhalten eine kleine Provision. Alle anderen Links sind normale Verlinkungen ohne Provision.</p>
     </section>
 
     <section id="ueber">

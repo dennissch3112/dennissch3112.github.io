@@ -1,41 +1,399 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KI Insider - KI-News und Tools, auf Deutsch, auf den Punkt.</title>
-  <link rel="icon" type="image/jpeg" href="/logo.jpg">
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0a0a0a;color:#f0f0f0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px}
-    .logo{width:120px;height:120px;border-radius:50%;margin-bottom:28px;object-fit:cover}
-    h1{font-size:2rem;font-weight:800;color:#f5c800;margin-bottom:12px;text-align:center}
-    .tagline{font-size:1.05rem;color:#aaa;text-align:center;max-width:420px;line-height:1.6;margin-bottom:40px}
-    .links{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:32px}
-    .btn{display:inline-block;padding:12px 24px;border-radius:8px;font-size:.95rem;font-weight:600;text-decoration:none;transition:opacity .15s}
-    .btn:hover{opacity:.85}
-    .btn-yt{background:#ff0000;color:#fff}
-    .btn-ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff}
-    .btn-tt{background:#010101;color:#fff;border:1px solid #333}
-    footer{margin-top:auto;padding-top:32px;font-size:.82rem;color:#555;text-align:center}
-    footer a{color:#666;text-decoration:none}
-    footer a:hover{color:#999}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI Insider — KI-News und Tools, auf Deutsch, auf den Punkt.</title>
+<meta name="description" content="Ich bin der KI Insider. Wöchentliche Videos über künstliche Intelligenz: News, Tools und Vergleiche — auf Deutsch, ohne Hype, auf den Punkt.">
+<meta property="og:title" content="Ich bin der KI Insider">
+<meta property="og:description" content="KI-News und Tools · auf Deutsch · auf den Punkt.">
+<meta property="og:image" content="logo.jpg">
+<meta name="theme-color" content="#00b4ff">
+<meta name="tiktok-developers-site-verification" content="KhPYwjqCpCb2zZcteaQwk7Z9zgvDdRPM"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#07080b;
+    --bg-elev:#0d0f14;
+    --card:#111520;
+    --card-hi:#161b28;
+    --ink:#f3f6fa;
+    --muted:#9aa3b2;
+    --faint:#5a6273;
+    --accent:#00b4ff;
+    --accent-hi:#4fd0ff;
+    --accent-deep:#0077b3;
+    --accent-ink:#04121c;
+    --gold:#ffd21e;
+    --line:rgba(255,255,255,.09);
+    --line-hi:rgba(0,180,255,.45);
+
+    --cat-news:#ff4d4d;
+    --cat-tools:#22c55e;
+    --cat-compare:#a855f7;
+    --cat-alltag:#00b4ff;
+
+    --font-display:'Big Shoulders Display',sans-serif;
+    --font-body:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+
+    --container:1160px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-body);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  .wrap{max-width:var(--container);margin:0 auto;padding-inline:28px}
+
+  /* background field */
+  .bg-field{position:fixed;inset:0;z-index:-2;pointer-events:none;background:
+    radial-gradient(60% 45% at 50% -5%, rgba(0,180,255,.16), transparent 70%),
+    radial-gradient(45% 40% at 85% 15%, rgba(0,119,179,.10), transparent 70%);}
+  .bg-grid{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000, transparent 75%);
+    -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000, transparent 75%);}
+
+  /* ---------- topbar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:60;
+    backdrop-filter:blur(14px);
+    background:color-mix(in srgb, var(--bg) 72%, transparent);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .row{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:var(--container);margin:0 auto}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.01em}
+  .brand img{width:38px;height:38px;border-radius:9px;box-shadow:0 0 0 1px var(--line), 0 0 22px -6px var(--accent)}
+  .brand b{font-family:var(--font-display);font-weight:800;font-size:1.18rem;letter-spacing:.02em}
+  .brand b .in{color:var(--accent)}
+  nav.top{display:flex;align-items:center;gap:28px}
+  nav.top a{font-size:.9rem;color:var(--muted);transition:color .2s}
+  nav.top a:hover{color:var(--ink)}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:9px 16px;border-radius:9999px;
+    background:var(--accent);color:var(--accent-ink);
+    font-size:.86rem;font-weight:600;
+    box-shadow:0 0 24px -6px var(--accent);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .nav-cta:hover{transform:translateY(-1px);box-shadow:0 0 32px -4px var(--accent)}
+  .nav-cta svg{width:16px;height:16px;fill:currentColor}
+
+  /* ---------- hero ---------- */
+  .hero{padding:96px 28px 88px;text-align:center;position:relative;display:flex;flex-direction:column;align-items:center}
+
+  .hero-logo{position:relative;width:172px;height:172px;margin-bottom:34px;display:flex;align-items:center;justify-content:center;
+    opacity:0;transform:scale(.9);animation:pop .8s cubic-bezier(.16,1,.3,1) .05s forwards}
+  .hero-logo img{width:150px;height:150px;border-radius:50%;position:relative;z-index:2;
+    box-shadow:0 0 0 1px rgba(255,255,255,.10), 0 0 60px -10px var(--accent), 0 30px 60px -20px rgba(0,0,0,.8)}
+  .hero-logo .halo{position:absolute;inset:0;border-radius:50%;border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);opacity:0}
+  .hero-logo .h1{animation:scan 3.4s ease-out infinite}
+  .hero-logo .h2{animation:scan 3.4s ease-out infinite 1.7s}
+  @keyframes scan{0%{transform:scale(.86);opacity:0}14%{opacity:.85}100%{transform:scale(1.5);opacity:0}}
+  @keyframes pop{to{opacity:1;transform:scale(1)}}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--font-mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent-hi);
+    padding:7px 14px;border:1px solid var(--line-hi);border-radius:9999px;
+    background:color-mix(in srgb,var(--accent) 8%,transparent);
+    margin-bottom:26px;
+    opacity:0;animation:rise .7s ease-out .35s forwards;
+  }
+  .eyebrow .live{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 30%,transparent);animation:blink 2.4s ease-in-out infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+  h1.slogan{
+    font-family:var(--font-display);font-weight:900;
+    font-size:clamp(2.9rem,8.5vw,6.2rem);line-height:.92;letter-spacing:-.01em;text-wrap:balance;
+    margin-bottom:24px;opacity:0;animation:rise .8s ease-out .48s forwards;
+  }
+  h1.slogan .accent{color:var(--accent);position:relative}
+  h1.slogan .accent .dot{color:var(--gold)}
+
+  .lede{font-size:clamp(1.05rem,2.4vw,1.3rem);color:var(--muted);max-width:600px;text-wrap:balance;margin-bottom:14px;opacity:0;animation:rise .8s ease-out .62s forwards}
+  .lede b{color:var(--ink);font-weight:600}
+  .sub{font-size:1rem;color:var(--faint);max-width:560px;text-wrap:balance;margin-bottom:38px;opacity:0;animation:rise .8s ease-out .72s forwards}
+
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:46px;opacity:0;animation:rise .8s ease-out .84s forwards}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:9999px;font-size:.95rem;font-weight:600;transition:transform .2s,box-shadow .2s,border-color .2s,background .2s}
+  .btn svg{width:19px;height:19px;fill:currentColor}
+  .btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 0 34px -8px var(--accent)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 44px -6px var(--accent)}
+  .btn-ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
+  .btn-ghost:hover{transform:translateY(-2px);border-color:var(--line-hi)}
+  .btn .ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  .stats{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;opacity:0;animation:rise .8s ease-out .96s forwards}
+  .stat{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:120px;padding:16px 26px;background:var(--card);border:1px solid var(--line);border-radius:16px}
+  .stat .n{font-family:var(--font-display);font-weight:800;font-size:1.9rem;color:var(--ink);line-height:1}
+  .stat .n .u{color:var(--accent)}
+  .stat .l{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ---------- sections ---------- */
+  section{padding:80px 0}
+  .head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:40px}
+  .head .k{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+  .head h2{font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,4.5vw,3rem);line-height:1;letter-spacing:-.01em}
+  .head .desc{font-size:.92rem;color:var(--muted);max-width:260px;text-align:right}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease-out,transform .7s ease-out}
+  .reveal.in{opacity:1;transform:translateY(0)}
+
+  /* videos */
+  .vid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .vid{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:transform .25s,border-color .25s,background .25s;display:flex;flex-direction:column}
+  .vid:hover{transform:translateY(-4px);border-color:var(--line-hi);background:var(--card-hi)}
+  .vid .thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--bg-elev)}
+  .vid .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
+  .vid:hover .thumb img{transform:scale(1.05)}
+  .vid .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;background:linear-gradient(transparent 40%, rgba(0,0,0,.35))}
+  .vid:hover .play{opacity:1}
+  .vid .play span{width:52px;height:52px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px -6px var(--accent)}
+  .vid .play svg{width:20px;height:20px;fill:var(--accent-ink);margin-left:3px}
+  .vid .badge{position:absolute;top:10px;left:10px;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:6px;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);color:var(--accent-hi);border:1px solid var(--line-hi)}
+  .vid .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .vid h3{font-size:1rem;font-weight:600;line-height:1.35;color:var(--ink)}
+  .vid .meta{margin-top:auto;font-family:var(--font-mono);font-size:.72rem;color:var(--faint);display:flex;gap:12px}
+
+  /* topics */
+  .topic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .topic{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 22px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;transition:transform .25s,border-color .25s,background .25s}
+  .topic::after{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--c);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+  .topic:hover{transform:translateY(-4px);background:var(--card-hi);border-color:color-mix(in srgb,var(--c) 40%,var(--line))}
+  .topic:hover::after{transform:scaleX(1)}
+  .topic .tnum{font-family:var(--font-mono);font-size:.72rem;color:var(--c)}
+  .topic h3{font-family:var(--font-display);font-weight:700;font-size:1.4rem;color:var(--ink)}
+  .topic p{font-size:.88rem;color:var(--muted);line-height:1.5}
+  .topic .go{margin-top:auto;font-family:var(--font-mono);font-size:.72rem;color:var(--faint);display:flex;align-items:center;gap:6px;transition:gap .2s,color .2s}
+  .topic:hover .go{gap:10px;color:var(--c)}
+
+  /* about */
+  .about{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;
+    background:var(--card);border:1px solid var(--line);border-radius:24px;padding:48px}
+  .about-lead{font-family:var(--font-display);font-weight:600;font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.25;letter-spacing:-.005em;text-wrap:balance}
+  .about-lead .accent{color:var(--accent)}
+  .about p{margin-top:18px;color:var(--muted);font-size:1rem}
+  .facts{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+  .fact{display:flex;justify-content:space-between;align-items:baseline;padding:15px 0;border-bottom:1px solid var(--line);font-family:var(--font-mono);font-size:.88rem}
+  .fact .k{color:var(--muted)}
+  .fact .v{color:var(--ink);font-weight:500;text-align:right}
+  .fact .v .accent{color:var(--accent)}
+
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:44px 0;margin-top:40px}
+  .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center}
+  .foot .brand img{width:32px;height:32px}
+  .foot-links{display:flex;flex-wrap:wrap;gap:20px;font-size:.86rem}
+  .foot-links a{color:var(--faint);transition:color .2s}
+  .foot-links a:hover{color:var(--accent)}
+  .foot .copy{font-family:var(--font-mono);font-size:.76rem;color:var(--faint)}
+
+  @media (max-width:900px){
+    .about{grid-template-columns:1fr;gap:32px;padding:34px}
+    .vid-grid{grid-template-columns:1fr 1fr}
+    .topic-grid{grid-template-columns:1fr 1fr}
+    .head{flex-direction:column;align-items:flex-start;gap:10px}
+    .head .desc{text-align:left}
+  }
+  @media (max-width:560px){
+    nav.top a:not(.nav-cta){display:none}
+    .vid-grid{grid-template-columns:1fr}
+    .topic-grid{grid-template-columns:1fr}
+    .hero{padding-top:64px}
+    .stat{min-width:100px;padding:14px 18px}
+  }
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+</style>
 </head>
 <body>
-  <img class="logo" src="/logo.jpg" alt="KI Insider Logo">
-  <h1>KI Insider</h1>
-  <p class="tagline">KI-News und Tools - auf Deutsch, auf den Punkt.<br>Woechentlich neue Videos ueber kuenstliche Intelligenz.</p>
-  <div class="links">
-    <a class="btn btn-yt" href="https://www.youtube.com/@kiinsiderde" target="_blank" rel="noopener">YouTube</a>
-    <a class="btn btn-ig" href="https://www.instagram.com/kiinsiderde" target="_blank" rel="noopener">Instagram</a>
-    <a class="btn btn-tt" href="https://www.tiktok.com/@kiinsiderde" target="_blank" rel="noopener">TikTok</a>
+  <div class="bg-field"></div>
+  <div class="bg-grid"></div>
+
+  <div class="topbar">
+    <div class="row">
+      <a class="brand" href="#top"><img src="logo.jpg" alt="KI Insider Logo"><b>KI&nbsp;<span class="in">INSIDER</span></b></a>
+      <nav class="top">
+        <a href="#videos">Videos</a>
+        <a href="#themen">Themen</a>
+        <a href="#ueber">Über</a>
+        <a class="nav-cta" href="https://www.youtube.com/@ichbinderkiinsider?sub_confirmation=1" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+          Abonnieren
+        </a>
+      </nav>
+    </div>
   </div>
+
+  <header class="hero" id="top">
+    <div class="hero-logo">
+      <span class="halo h1"></span>
+      <span class="halo h2"></span>
+      <img src="logo.jpg" alt="KI Insider Logo">
+    </div>
+
+    <span class="eyebrow"><span class="live"></span>Wöchentlich · Künstliche Intelligenz · Deutsch</span>
+
+    <h1 class="slogan">Ich bin der <span class="accent">KI&nbsp;Insider<span class="dot">.</span></span></h1>
+
+    <p class="lede"><b>KI-News und Tools — auf Deutsch, auf den Punkt.</b></p>
+    <p class="sub">Jede Woche neue Videos: aktuelle KI-News eingeordnet, Tools erklärt und ehrlich verglichen. Kein Hype, kein Marketing-Text — nur das, was für deinen Alltag wirklich zählt.</p>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://www.youtube.com/@ichbinderkiinsider?sub_confirmation=1" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+        YouTube abonnieren
+      </a>
+      <a class="btn btn-ghost" href="https://www.instagram.com/kiinsiderde" target="_blank" rel="noopener">
+        <svg class="ig-mask" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 1.8.25 2.2.42.6.22 1 .48 1.4.9.42.4.68.8.9 1.4.17.4.36 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.25 1.8-.42 2.2-.22.6-.48 1-.9 1.4-.4.42-.8.68-1.4.9-.4.17-1 .36-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-1.8-.25-2.2-.42-.6-.22-1-.48-1.4-.9-.42-.4-.68-.8-.9-1.4-.17-.4-.36-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.25-1.8.42-2.2.22-.6.48-1 .9-1.4.4-.42.8-.68 1.4-.9.4-.17 1-.36 2.2-.42C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.8-11.2a1.54 1.54 0 1 1-1.54-1.54 1.54 1.54 0 0 1 1.54 1.54z"/></svg>
+        Instagram
+      </a>
+      <a class="btn btn-ghost" href="https://www.tiktok.com/@kiinsiderde" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M16.6 5.8a4.8 4.8 0 0 1-1-.1v7.7a4.9 4.9 0 1 1-4.9-4.9c.2 0 .3 0 .5.02v2.5a2.4 2.4 0 1 0 1.7 2.3V2h2.4a4.8 4.8 0 0 0 4.2 4.2v2.5a7.2 7.2 0 0 1-2.9-.6z"/></svg>
+        TikTok
+      </a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span class="n" id="stat-videos">120</span><span class="l">Videos</span></div>
+      <div class="stat"><span class="n" id="stat-subs">102</span><span class="l">Abonnenten</span></div>
+      <div class="stat"><span class="n" id="stat-views">38<span class="u">k</span></span><span class="l">Aufrufe</span></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section id="videos">
+      <div class="head reveal">
+        <div>
+          <div class="k">01 — Neu auf dem Kanal</div>
+          <h2>Die neuesten Videos</h2>
+        </div>
+        <a class="btn btn-ghost" href="https://www.youtube.com/@ichbinderkiinsider/videos" target="_blank" rel="noopener" style="font-size:.85rem;padding:11px 18px">Alle ansehen →</a>
+      </div>
+      <div class="vid-grid reveal">
+        <a class="vid" href="https://www.youtube.com/watch?v=zObUkGBGhRI" target="_blank" rel="noopener">
+          <div class="thumb"><span class="badge">Long · 5:30</span><img src="https://i.ytimg.com/vi/zObUkGBGhRI/hqdefault.jpg" alt="" loading="lazy"><span class="play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span></div>
+          <div class="body"><h3>KI-Tools kostenlos: Diese 5 brauchst du 2026 nicht bezahlen</h3><div class="meta"><span>Vergleich</span><span>ChatGPT · Claude · Gemini</span></div></div>
+        </a>
+        <a class="vid" href="https://www.youtube.com/watch?v=W0yBKOAznpA" target="_blank" rel="noopener">
+          <div class="thumb"><span class="badge">Long · 5:58</span><img src="https://i.ytimg.com/vi/W0yBKOAznpA/hqdefault.jpg" alt="" loading="lazy"><span class="play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span></div>
+          <div class="body"><h3>Hermes Agent vs. n8n: Brauchst du wirklich einen KI-Agenten?</h3><div class="meta"><span>Tools</span><span>Automatisierung</span></div></div>
+        </a>
+        <a class="vid" href="https://www.youtube.com/watch?v=YIgSylg8HRw" target="_blank" rel="noopener">
+          <div class="thumb"><span class="badge">Short · 0:38</span><img src="https://i.ytimg.com/vi/YIgSylg8HRw/hqdefault.jpg" alt="" loading="lazy"><span class="play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span></div>
+          <div class="body"><h3>China fordert KI-Kontrolle — die EU macht es anders</h3><div class="meta"><span>News</span><span>819 Aufrufe</span></div></div>
+        </a>
+      </div>
+    </section>
+
+    <section id="themen">
+      <div class="head reveal">
+        <div>
+          <div class="k">02 — Vier Frequenzen</div>
+          <h2>Themen, klar getrennt</h2>
+        </div>
+        <div class="desc">Jede Kategorie hat ihre eigene Farbe — auch als Playlist auf YouTube.</div>
+      </div>
+      <div class="topic-grid reveal">
+        <a class="topic" style="--c:var(--cat-news)" href="https://www.youtube.com/playlist?list=PLMSBppvGVsOSUSEfIiRvvMJTGly_S2yXk" target="_blank" rel="noopener">
+          <span class="tnum">01</span><h3>KI&#8209;News</h3><p>Aktuelle Meldungen und neue Modelle — eingeordnet statt nur gemeldet.</p><span class="go">Playlist ansehen →</span>
+        </a>
+        <a class="topic" style="--c:var(--cat-tools)" href="https://www.youtube.com/playlist?list=PLMSBppvGVsORSvcUDriavInwJo-uc3hf2" target="_blank" rel="noopener">
+          <span class="tnum">02</span><h3>KI&#8209;Tools</h3><p>Anleitungen zu ChatGPT, Claude, Perplexity, n8n und mehr.</p><span class="go">Playlist ansehen →</span>
+        </a>
+        <a class="topic" style="--c:var(--cat-compare)" href="https://www.youtube.com/playlist?list=PLMSBppvGVsORRQj-Koa81zbFlbtTyVA0S" target="_blank" rel="noopener">
+          <span class="tnum">03</span><h3>Im Vergleich</h3><p>ChatGPT, Gemini, Claude &amp; Co. ehrlich gegeneinander getestet.</p><span class="go">Playlist ansehen →</span>
+        </a>
+        <a class="topic" style="--c:var(--cat-alltag)" href="https://www.youtube.com/playlist?list=PLMSBppvGVsOQpU8QgHpRG1esZZilZtIwh" target="_blank" rel="noopener">
+          <span class="tnum">04</span><h3>Im Alltag</h3><p>Konkrete Anwendungsfälle: Bewerbung, Freelancing, Geld sparen.</p><span class="go">Playlist ansehen →</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="ueber">
+      <div class="about reveal">
+        <div>
+          <p class="about-lead">Die KI-Welt produziert jeden Tag mehr Rauschen als Signal. <span class="accent">Ich filtere es</span> — und zeige, was für berufstätige Menschen wirklich relevant ist.</p>
+          <p>Kein Fachchinesisch, keine Übertreibung, keine bezahlten Lobeshymnen. Nur ehrliche Einordnung — jede Woche neu, auf Deutsch.</p>
+        </div>
+        <div class="facts">
+          <div class="fact"><span class="k">Kanal</span><span class="v">Ich bin der KI Insider</span></div>
+          <div class="fact"><span class="k">Sprache</span><span class="v">Deutsch</span></div>
+          <div class="fact"><span class="k">Rhythmus</span><span class="v">Wöchentlich</span></div>
+          <div class="fact"><span class="k">Formate</span><span class="v">Longs + Shorts</span></div>
+          <div class="fact"><span class="k">Haltung</span><span class="v"><span class="accent">Kein Hype.</span> Auf den Punkt.</span></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
   <footer>
-    <a href="/tos.html">Nutzungsbedingungen</a> &nbsp;&middot;&nbsp;
-    <a href="/privacy-policy.html">Datenschutz</a> &nbsp;&middot;&nbsp;
-    &copy; 2026 KI Insider &middot; Dennis Schiemann &nbsp;&middot;&nbsp;
-    <a href="mailto:kiinsider.yt@gmail.com">kiinsider.yt@gmail.com</a>
+    <div class="wrap foot">
+      <a class="brand" href="#top"><img src="logo.jpg" alt="KI Insider Logo"><b>KI&nbsp;<span class="in">INSIDER</span></b></a>
+      <div class="foot-links">
+        <a href="https://www.youtube.com/@ichbinderkiinsider" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.instagram.com/kiinsiderde" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@kiinsiderde" target="_blank" rel="noopener">TikTok</a>
+        <a href="privacy-policy.html">Datenschutz</a>
+        <a href="mailto:kiinsider.yt@gmail.com">Kontakt</a>
+      </div>
+      <div class="copy">&copy; 2026 KI Insider · Dennis Schiemann</div>
+    </div>
   </footer>
+
+<script>
+  // count-up stats
+  const animateCount = (el, target, suffix='') => {
+    const dur = 1100, t0 = performance.now();
+    const step = (t) => {
+      const p = Math.min((t - t0) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.firstChild.nodeValue = Math.round(target * eased).toString();
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  let counted = false;
+  const statsEl = document.querySelector('.stats');
+  const sio = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting && !counted){
+        counted = true;
+        animateCount(document.getElementById('stat-videos'), 120);
+        animateCount(document.getElementById('stat-subs'), 102);
+        animateCount(document.getElementById('stat-views'), 38);
+        sio.disconnect();
+      }
+    });
+  }, {threshold:.4});
+  if(statsEl) sio.observe(statsEl);
+</script>
 </body>
 </html>

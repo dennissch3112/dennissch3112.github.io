@@ -4,10 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KI Insider — KI-News und Tools, auf Deutsch, auf den Punkt.</title>
-<meta name="description" content="Ich bin der KI Insider. Wöchentliche Videos über künstliche Intelligenz: News, Tools und Vergleiche — auf Deutsch, ohne Hype, auf den Punkt.">
+<meta name="description" content="Ich bin der KI Insider. Täglich neue Videos über künstliche Intelligenz: News, Tools im Test und Vergleiche — auf Deutsch, ohne Hype, auf den Punkt.">
 <meta property="og:title" content="Ich bin der KI Insider">
 <meta property="og:description" content="KI-News und Tools · auf Deutsch · auf den Punkt.">
-<meta property="og:image" content="logo.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dennissch3112.github.io/">
+<meta property="og:image" content="https://dennissch3112.github.io/logo.jpg">
+<meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#00b4ff">
 <meta name="tiktok-developers-site-verification" content="KhPYwjqCpCb2zZcteaQwk7Z9zgvDdRPM"/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -198,6 +201,9 @@
   .fact .k{color:var(--muted)}
   .fact .v{color:var(--ink);font-weight:500;text-align:right}
   .fact .v .accent{color:var(--accent)}
+  ul.promise{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:10px}
+  ul.promise li{position:relative;padding-left:30px;color:var(--ink);font-size:.98rem}
+  ul.promise li::before{content:"✓";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:6px;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent);font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center}
 
   /* footer */
   footer{border-top:1px solid var(--line);padding:44px 0;margin-top:40px}
@@ -251,12 +257,12 @@
       <img src="logo.jpg" alt="KI Insider Logo">
     </div>
 
-    <span class="eyebrow"><span class="live"></span>Wöchentlich · Künstliche Intelligenz · Deutsch</span>
+    <span class="eyebrow"><span class="live"></span>Täglich neue Videos · Künstliche Intelligenz · Deutsch</span>
 
     <h1 class="slogan">Ich bin der <span class="accent">KI&nbsp;Insider.</span></h1>
 
     <p class="lede"><b>KI-News und Tools — auf Deutsch, auf den Punkt.</b></p>
-    <p class="sub">Jede Woche neue Videos: aktuelle KI-News eingeordnet, Tools erklärt und ehrlich verglichen. Kein Hype, kein Marketing-Text — nur das, was für deinen Alltag wirklich zählt.</p>
+    <p class="sub">Täglich neue Videos: aktuelle KI-News eingeordnet, Tools im Test und ehrlich verglichen. Kein Hype, kein Marketing-Text — nur das, was für deinen Alltag wirklich zählt.</p>
 
     <div class="cta-row">
       <a class="btn btn-primary" href="https://www.youtube.com/@ichbinderkiinsider?sub_confirmation=1" target="_blank" rel="noopener">
@@ -274,7 +280,7 @@
     </div>
 
     <div class="stats">
-      <div class="stat"><span class="n" id="stat-videos">120</span><span class="l">Videos</span></div>
+      <div class="stat"><span class="n" id="stat-videos">119</span><span class="l">Videos</span></div>
       <div class="stat"><span class="n" id="stat-subs">102</span><span class="l">Abonnenten</span></div>
       <div class="stat"><span class="n" id="stat-views">38<span class="u">k</span></span><span class="l">Aufrufe</span></div>
     </div>
@@ -301,7 +307,7 @@
         </a>
         <a class="vid" href="https://www.youtube.com/watch?v=YIgSylg8HRw" target="_blank" rel="noopener">
           <div class="thumb"><span class="badge">Short · 0:38</span><img src="https://i.ytimg.com/vi/YIgSylg8HRw/hqdefault.jpg" alt="" loading="lazy"><span class="play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></span></div>
-          <div class="body"><h3>China fordert KI-Kontrolle — die EU macht es anders</h3><div class="meta"><span>News</span><span>819 Aufrufe</span></div></div>
+          <div class="body"><h3>China fordert KI-Kontrolle — die EU macht es anders</h3><div class="meta"><span>KI-News</span><span>World AI Conference</span></div></div>
         </a>
       </div>
     </section>
@@ -316,16 +322,16 @@
       </div>
       <div class="topic-grid reveal">
         <a class="topic" style="--c:var(--cat-news)" href="https://www.youtube.com/playlist?list=PLMSBppvGVsOSUSEfIiRvvMJTGly_S2yXk" target="_blank" rel="noopener">
-          <span class="tnum">01</span><h3>KI&#8209;News</h3><p>Aktuelle Meldungen und neue Modelle — eingeordnet statt nur gemeldet.</p><span class="go">Playlist ansehen →</span>
+          <span class="tnum">01 · 31 Videos</span><h3>KI&#8209;News</h3><p>Aktuelle Meldungen und neue Modelle — eingeordnet statt nur gemeldet.</p><span class="go">Playlist ansehen →</span>
         </a>
         <a class="topic" style="--c:var(--cat-tools)" href="https://www.youtube.com/playlist?list=PLMSBppvGVsORSvcUDriavInwJo-uc3hf2" target="_blank" rel="noopener">
-          <span class="tnum">02</span><h3>KI&#8209;Tools</h3><p>Anleitungen zu ChatGPT, Claude, Perplexity, n8n und mehr.</p><span class="go">Playlist ansehen →</span>
+          <span class="tnum">02 · 14 Videos</span><h3>KI&#8209;Tools</h3><p>Tutorials und Schritt-für-Schritt-Anleitungen: ChatGPT, Claude, Perplexity, n8n und mehr.</p><span class="go">Playlist ansehen →</span>
         </a>
         <a class="topic" style="--c:var(--cat-compare)" href="https://www.youtube.com/playlist?list=PLMSBppvGVsORRQj-Koa81zbFlbtTyVA0S" target="_blank" rel="noopener">
-          <span class="tnum">03</span><h3>Im Vergleich</h3><p>ChatGPT, Gemini, Claude &amp; Co. ehrlich gegeneinander getestet.</p><span class="go">Playlist ansehen →</span>
+          <span class="tnum">03 · 17 Videos</span><h3>KI im Vergleich</h3><p>ChatGPT, Gemini, Claude &amp; Co. ehrlich gegeneinander getestet.</p><span class="go">Playlist ansehen →</span>
         </a>
         <a class="topic" style="--c:var(--cat-alltag)" href="https://www.youtube.com/playlist?list=PLMSBppvGVsOQpU8QgHpRG1esZZilZtIwh" target="_blank" rel="noopener">
-          <span class="tnum">04</span><h3>Im Alltag</h3><p>Konkrete Anwendungsfälle: Bewerbung, Freelancing, Geld sparen.</p><span class="go">Playlist ansehen →</span>
+          <span class="tnum">04 · 10 Videos</span><h3>KI im Alltag</h3><p>Konkrete Anwendungsfälle: Bewerbung, Freelancing, Geld sparen.</p><span class="go">Playlist ansehen →</span>
         </a>
       </div>
     </section>
@@ -334,12 +340,18 @@
       <div class="about reveal">
         <div>
           <p class="about-lead">Die KI-Welt produziert jeden Tag mehr Rauschen als Signal. <span class="accent">Ich filtere es</span> — und zeige, was für berufstätige Menschen wirklich relevant ist.</p>
-          <p>Kein Fachchinesisch, keine Übertreibung, keine bezahlten Lobeshymnen. Nur ehrliche Einordnung — jede Woche neu, auf Deutsch.</p>
+          <p>Kein Fachchinesisch, keine Übertreibung, keine bezahlten Lobeshymnen. Nur ehrliche Einordnung — täglich neu, auf Deutsch.</p>
+          <ul class="promise">
+            <li>KI-Tools im Test</li>
+            <li>Schritt-für-Schritt-Tutorials</li>
+            <li>Zeitsparen mit KI im Alltag &amp; Beruf</li>
+            <li>Neue Tools zuerst entdecken</li>
+          </ul>
         </div>
         <div class="facts">
           <div class="fact"><span class="k">Kanal</span><span class="v">Ich bin der KI Insider</span></div>
           <div class="fact"><span class="k">Sprache</span><span class="v">Deutsch</span></div>
-          <div class="fact"><span class="k">Rhythmus</span><span class="v">Wöchentlich</span></div>
+          <div class="fact"><span class="k">Rhythmus</span><span class="v">Täglich neue Videos</span></div>
           <div class="fact"><span class="k">Formate</span><span class="v">Longs + Shorts</span></div>
           <div class="fact"><span class="k">Haltung</span><span class="v"><span class="accent">Kein Hype.</span> Auf den Punkt.</span></div>
         </div>
@@ -385,7 +397,7 @@
     entries.forEach(e => {
       if(e.isIntersecting && !counted){
         counted = true;
-        animateCount(document.getElementById('stat-videos'), 120);
+        animateCount(document.getElementById('stat-videos'), 119);
         animateCount(document.getElementById('stat-subs'), 102);
         animateCount(document.getElementById('stat-views'), 38);
         sio.disconnect();
